@@ -2,6 +2,7 @@ package tn.esprit.moatazachour4ssa15.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Table(name = "maintenance")
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,9 +18,12 @@ import java.time.LocalDate;
 public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idMaintenance;
+    Long idMaintenance;
 
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
-    private String description;
+    LocalDate dateDebut;
+    LocalDate dateFin;
+    String description;
+
+    @ManyToOne
+    Vehicule vehicule;
 }

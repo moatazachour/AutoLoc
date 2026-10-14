@@ -2,6 +2,7 @@ package tn.esprit.moatazachour4ssa15.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Table(name = "reservation")
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,11 +18,20 @@ import java.time.LocalDate;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReservation;
+    Long idReservation;
 
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+    LocalDate dateDebut;
+    LocalDate dateFin;
 
     @Enumerated(EnumType.STRING)
-    private StatutReservation statut;
+    StatutReservation statut;
+
+    @ManyToOne
+    Vehicule vehicle;
+
+    @ManyToOne
+    Client client;
+
+    @OneToOne
+    Contrat contrat;
 }

@@ -1,13 +1,14 @@
 package tn.esprit.moatazachour4ssa15.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,9 +17,15 @@ import lombok.*;
 public class Agence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAgence;
-    private String nom;
-    private String ville;
-    private String adresse;
-    private String telephone;
+    Long idAgence;
+    String nom;
+    String ville;
+    String adresse;
+    String telephone;
+
+    @OneToMany(mappedBy = "agence")
+    List<Vehicule> vehicules;
+
+    @OneToMany(mappedBy = "agence")
+    List<Employee> employees;
 }

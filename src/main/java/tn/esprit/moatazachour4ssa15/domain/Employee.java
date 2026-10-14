@@ -2,9 +2,11 @@ package tn.esprit.moatazachour4ssa15.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -13,10 +15,13 @@ import lombok.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmploye;
-    private String nom;
-    private String prenom;
+    Long idEmploye;
+    String nom;
+    String prenom;
 
     @Enumerated(EnumType.STRING)
-    private RoleEmploye role;
+    RoleEmploye role;
+
+    @ManyToOne
+    Agence agence;
 }
