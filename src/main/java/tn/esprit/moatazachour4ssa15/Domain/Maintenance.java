@@ -1,4 +1,4 @@
-package tn.esprit.moatazachour4ssa15.domain;
+package tn.esprit.moatazachour4ssa15.Domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "reservation")
+@Table(name = "maintenance")
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -15,23 +15,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Reservation {
+public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idReservation;
+    Long idMaintenance;
 
     LocalDate dateDebut;
     LocalDate dateFin;
-
-    @Enumerated(EnumType.STRING)
-    StatutReservation statut;
+    String description;
 
     @ManyToOne
-    Vehicule vehicle;
-
-    @ManyToOne
-    Client client;
-
-    @OneToOne
-    Contrat contrat;
+    Vehicule vehicule;
 }

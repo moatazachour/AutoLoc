@@ -1,13 +1,13 @@
-package tn.esprit.moatazachour4ssa15.domain;
+package tn.esprit.moatazachour4ssa15.Domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "maintenance")
+@Table(name = "equipement")
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -15,15 +15,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Maintenance {
+public class Equipement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idMaintenance;
+    Long idEquipement;
+    String libelle;
 
-    LocalDate dateDebut;
-    LocalDate dateFin;
-    String description;
-
-    @ManyToOne
-    Vehicule vehicule;
+    @ManyToMany(mappedBy = "equipements")
+    List<Vehicule> vehicules;
 }

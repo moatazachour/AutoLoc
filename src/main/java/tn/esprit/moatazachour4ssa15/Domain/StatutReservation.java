@@ -1,4 +1,4 @@
-package tn.esprit.moatazachour4ssa15.domain;
+package tn.esprit.moatazachour4ssa15.Domain;
 
 public enum StatutReservation {
     EN_ATTENTE,
