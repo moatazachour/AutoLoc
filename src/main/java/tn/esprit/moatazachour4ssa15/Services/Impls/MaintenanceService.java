@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Maintenance;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IMaintenanceRepository;
 import tn.esprit.moatazachour4ssa15.Services.IMaintenanceService;
 
@@ -21,7 +22,9 @@ public class MaintenanceService implements IMaintenanceService {
 
     @Override
     public Maintenance getById(Long id) {
-        return maintenanceRepository.findById(id).orElse(null);
+
+        return maintenanceRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Maintenace", id));
     }
 
     @Override

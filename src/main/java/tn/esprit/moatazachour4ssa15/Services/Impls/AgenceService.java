@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Agence;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IAgenceRepository;
 import tn.esprit.moatazachour4ssa15.Services.IAgenceService;
 
@@ -21,7 +22,8 @@ public class AgenceService implements IAgenceService {
 
     @Override
     public Agence getById(Long id) {
-        return agenceRepository.findById(id).orElse(null);
+        return agenceRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Agence", id));
     }
 
     @Override

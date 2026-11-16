@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Employee;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IEmployeeRepository;
 import tn.esprit.moatazachour4ssa15.Services.IEmployeeService;
 
@@ -21,7 +22,9 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee getById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+
+        return employeeRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Employee", id));
     }
 
     @Override

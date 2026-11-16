@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Paiement;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IPaiementRepository;
 import tn.esprit.moatazachour4ssa15.Services.IPaiementService;
 
@@ -21,7 +22,9 @@ public class PaiementService implements IPaiementService {
 
     @Override
     public Paiement getById(Long id) {
-        return paiementRepository.findById(id).orElse(null);
+
+        return paiementRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Paiement", id));
     }
 
     @Override

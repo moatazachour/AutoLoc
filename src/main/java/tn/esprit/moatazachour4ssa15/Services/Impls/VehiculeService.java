@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Vehicule;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IVehiculeRepository;
 import tn.esprit.moatazachour4ssa15.Services.IVehiculeService;
 
@@ -21,7 +22,8 @@ public class VehiculeService implements IVehiculeService {
 
     @Override
     public Vehicule getById(Long id) {
-        return vehiculeRepository.findById(id).orElse(null);
+        return vehiculeRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Vehicle", id));
     }
 
     @Override

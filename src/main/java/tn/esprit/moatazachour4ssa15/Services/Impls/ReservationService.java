@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Reservation;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IReservationRepository;
 import tn.esprit.moatazachour4ssa15.Services.IReservationService;
 
@@ -21,7 +22,9 @@ public class ReservationService implements IReservationService {
 
     @Override
     public Reservation getById(Long id) {
-        return reservationRepository.findById(id).orElse(null);
+
+        return reservationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Reservation", id));
     }
 
     @Override

@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Client;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IClientRepository;
 import tn.esprit.moatazachour4ssa15.Services.IClientService;
 
@@ -21,7 +22,8 @@ public class ClientService implements IClientService {
 
     @Override
     public Client getById(Long id) {
-        return clientRepository.findById(id).orElse(null);
+        return clientRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Client", id));
     }
 
     @Override

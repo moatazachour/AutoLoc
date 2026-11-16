@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Equipement;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IEquipementRepository;
 import tn.esprit.moatazachour4ssa15.Services.IEquipementService;
 
@@ -21,7 +22,9 @@ public class EquipementService implements IEquipementService {
 
     @Override
     public Equipement getById(Long id) {
-        return equipementRepository.findById(id).orElse(null);
+
+        return equipementRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Equipement", id));
     }
 
     @Override

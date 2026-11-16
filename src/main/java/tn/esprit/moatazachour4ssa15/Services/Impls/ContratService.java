@@ -3,6 +3,7 @@ package tn.esprit.moatazachour4ssa15.Services.Impls;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.moatazachour4ssa15.Domain.Contrat;
+import tn.esprit.moatazachour4ssa15.Exception.ResourceNotFoundException;
 import tn.esprit.moatazachour4ssa15.Repositories.IClientRepository;
 import tn.esprit.moatazachour4ssa15.Repositories.IContratRepository;
 import tn.esprit.moatazachour4ssa15.Services.IContratService;
@@ -22,7 +23,9 @@ public class ContratService implements IContratService {
 
     @Override
     public Contrat getById(Long id) {
-        return contratRepository.findById(id).orElse(null);
+
+        return contratRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Contrat", id));
     }
 
     @Override
