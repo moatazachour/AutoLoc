@@ -1,5 +1,6 @@
 package tn.esprit.moatazachour4ssa15.Domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -27,6 +28,7 @@ public class Contrat {
     private boolean valide;
 
     @OneToMany(mappedBy = "contrat", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JsonManagedReference
     List<Paiement> paiements;
 
     @OneToOne(mappedBy = "contrat")

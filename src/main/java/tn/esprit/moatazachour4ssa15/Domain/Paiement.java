@@ -1,5 +1,6 @@
 package tn.esprit.moatazachour4ssa15.Domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -28,5 +29,6 @@ public class Paiement {
     ModePaiement modePaiement;
 
     @ManyToOne
+    @JsonBackReference
     Contrat contrat;
 }

@@ -18,6 +18,13 @@ public class ContratService implements IContratService {
 
     @Override
     public Contrat create(Contrat Contrat) {
+
+        if (Contrat.getPaiements() != null) {
+            Contrat.getPaiements().forEach(
+                    paiement -> paiement.setContrat(Contrat)
+            );
+        }
+
         return contratRepository.save(Contrat);
     }
 
@@ -30,7 +37,16 @@ public class ContratService implements IContratService {
 
     @Override
     public Contrat update(Contrat Contrat) {
-        return contratRepository.save(Contrat);
+        Contrat existingContrat = getById(Contrat.getIdContrat());
+
+        existingContrat.setMontantTotal(Contrat.getMontantTotal());
+        // Set other values if needed in the future
+        // For now we only change the contract amount
+        // Not sure but in my opinion we should be able
+        // to update all attributes but business wise this
+        // is enough for now
+
+        return contratRepository.save(existingContrat);
     }
 
     @Override
